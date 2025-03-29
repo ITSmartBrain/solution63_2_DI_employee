@@ -1,7 +1,7 @@
 package solution.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import solution.domain.CompanyReport;
 import solution.domain.Employee;
 
 import java.util.ArrayList;
@@ -11,21 +11,15 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService {
     private List<Employee> employees = new ArrayList<>();
-    private final CompanyReport companyReport;
 
-    public EmployeeService(CompanyReport companyReport) {
-        this.companyReport = companyReport;
-    }
 
     public Employee addEmployee(Employee employee) {
-        employee.setId((long) (employees.size() + 1));
         employees.add(employee);
-        companyReport.addEmployee(employee.getDepartment());
         return employee;
     }
 
     public List<Employee> getAllEmployees() {
-        return new ArrayList<>(employees);
+        return employees;
     }
 
     public List<Employee> getEmployeesByDepartment(String department) {
